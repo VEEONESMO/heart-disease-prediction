@@ -1,31 +1,54 @@
 import { useState } from "react";
 
-import Navbar from "./components/Navbar";
-import Predict from "./pages/Predict";
+import {
+BrowserRouter,
+Routes,
+Route,
+Navigate
+} from "react-router-dom";
+
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Predict from "./pages/Predict";
+
+import Navbar from "./components/Navbar";
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [isLoggedIn,setIsLoggedIn]=useState(false);
 
-  return (
+if(!isLoggedIn){
+return(
+<Login onLogin={setIsLoggedIn}/>
+);
+}
 
-    <div>
+return(
 
-      {isLoggedIn ? (
-        <>
-          <Navbar onLogout={() => setIsLoggedIn(false)} />
-          <Dashboard />
-          <Predict />
-        </>
-      ) : (
-        <Login onLogin={setIsLoggedIn} />
-      )}
+<BrowserRouter>
 
-    </div>
+<Navbar onLogout={()=>setIsLoggedIn(false)}/>
 
-  );
+<Routes>
+
+<Route path="/" element={<Navigate to="/dashboard"/>}/>
+
+<Route
+path="/dashboard"
+element={<Dashboard/>}
+/>
+
+<Route
+path="/predict"
+element={<Predict/>}
+/>
+
+</Routes>
+
+</BrowserRouter>
+
+);
+
 }
 
 export default App;

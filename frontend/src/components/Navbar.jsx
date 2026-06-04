@@ -1,20 +1,28 @@
+import { Link } from "react-router-dom";
+
 function Navbar({ onLogout }) {
 
   return (
 
     <nav style={styles.nav}>
 
-      <h2>❤️ Heart Disease Predictor</h2>
+      <h2>
+        ❤️ Heart Disease Predictor
+      </h2>
 
       <div>
 
-        <button style={styles.button}>
-          Dashboard
-        </button>
+        <Link to="/dashboard">
+          <button style={styles.button}>
+            Dashboard
+          </button>
+        </Link>
 
-        <button style={styles.button}>
-          Prediction
-        </button>
+        <Link to="/predict">
+          <button style={styles.button}>
+            Prediction
+          </button>
+        </Link>
 
         <button
           style={styles.logoutButton}
@@ -28,6 +36,7 @@ function Navbar({ onLogout }) {
     </nav>
 
   );
+
 }
 
 const styles = {
